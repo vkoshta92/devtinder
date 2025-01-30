@@ -1,7 +1,8 @@
 const express = require("express");
 const connectDB = require("./config/database.js");
 const app = express();
-const User = require("./models/user")
+const User = require("./models/user");
+const {validateSignUpData}= require("./utils/validation.js")
 
 app.use(express.json());  // json me convert krta h server se dta ko
 app.post("/signup", async (req, res) => {
@@ -13,6 +14,16 @@ app.post("/signup", async (req, res) => {
   //   password: "sachin@123",
   // });
 //dynamic data srnd
+
+// validation of data
+validateSignUpData(req);
+// encrypt 
+
+
+
+
+//create new instance
+
   const user=new User(req.body);
   try {
     await user.save();
